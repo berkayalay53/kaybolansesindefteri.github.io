@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kaybolan Sesin Defteri — Berkay Alay</title>
+  <meta name="description" content="Kaybolan Sesin Defteri — Berkay Alay. Yazıyla konuşan, sessizlikle yankılanan bir defter." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero__inner">
+      <figure class="cover" id="coverWrap">
+        <img id="coverImg" src="./cover.jpg" alt="Kaybolan Sesin Defteri kapak görseli" loading="eager" />
+        <figcaption class="cover__caption">Kaybolan Sesin Defteri</figcaption>
+      </figure>
+
+      <div class="title">
+        <p class="kicker">Berkay Alay</p>
+        <h1>Kaybolan Sesin Defteri</h1>
+        <p class="sub">
+          Bu defter bir suskunluk kaydıdır.
+          Okuyan kişi tanık olur.
+        </p>
+
+        <div class="cta">
+          <a class="btn btn--primary" href="#oku">Okumaya Başla</a>
+          <button class="btn btn--ghost" type="button" id="toggleTheme">Gece Modu</button>
+        </div>
+
+        <p class="hint">
+          Bazı sesler duyulmaz. Yazılır.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- AÇILIŞ -->
+    <section class="section section--quote">
+      <div class="wrap">
+        <blockquote class="quote quote--hero">
+          <p>
+            “Yanılıyorsun Watson.
+            Bu çocuk suskun değil.
+            En gürültülü çığlıklar, dudaklar kapalıyken atılanlardır.
+            Bu defter sessiz değil, sağır edici bir gürültüyle dolu.”
+          </p>
+          <footer>— <span>Kaybolan Sesin Defteri</span></footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ORTA ALINTILAR -->
+    <section class="section section--grid">
+      <div class="wrap grid">
+        <blockquote class="quote">
+          <p>
+            “Bu, bir itirafın değil, bir tereddüdün el yazısıdır.
+            Yazmakla silmek arasında kalmış bir ruhun izi.”
+          </p>
+          <footer>— <span>Kaybolan Sesin Defteri</span></footer>
+        </blockquote>
+
+        <blockquote class="quote">
+          <p>
+            “Bize getirilen şey bir cinayet dosyası değil,
+            bir ‘varoluş’ vakasıdır.”
+          </p>
+          <footer>— <span>Kaybolan Sesin Defteri</span></footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- DERİNLEŞME -->
+    <section class="section">
+      <div class="wrap">
+        <blockquote class="quote">
+          <p>
+            “Bu sayfa yanmış.”
+          </p>
+          <footer>— <span>Kaybolan Sesin Defteri</span></footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- OKUMA -->
+    <section class="section section--reader" id="oku">
+      <div class="wrap">
+        <div class="readerTop">
+          <h2>Okuma</h2>
+          <p class="readerSub">
+            PDF yeni sekmede açılır. Sessiz bir zamanda okunması önerilir.
+          </p>
+
+          <div class="readerActions">
+            <a class="btn btn--primary" href="./kaybolan-sesin-defteri.pdf" target="_blank" rel="noopener">
+              PDF’yi Yeni Sekmede Aç
+            </a>
+            <a class="btn btn--ghost" href="./kaybolan-sesin-defteri.pdf" download>
+              PDF’yi İndir
+            </a>
+          </div>
+        </div>
+
+        <blockquote class="quote quote--closing">
+          <p>
+            “Kitap biter.
+            Ama ses… devam eder.
+            Çünkü bazı hikâyeler, okuyucunun kitabı kapattığı o sessiz anda başlar.”
+          </p>
+          <footer>— <span>Kaybolan Sesin Defteri</span></footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <section class="section section--footer">
+      <div class="wrap footer">
+        <div class="sig">
+          <p class="sig__name">Berkay Alay</p>
+          <p class="sig__meta">Yazar Sayfası • Kaybolan Sesin Defteri</p>
+        </div>
+
+        <div class="links">
+          <a href="https://books2read.com/berkayalay" target="_blank" rel="noopener">
+            Yazar sayfası
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const img = document.getElementById('coverImg');
+    img.addEventListener('error', () => {
+      const wrap = document.getElementById('coverWrap');
+      wrap.classList.add('cover--fallback');
+      img.remove();
+    });
+
+    const toggle = document.getElementById('toggleTheme');
+    const key = 'ba_theme';
+    const saved = localStorage.getItem(key);
+    if (saved === 'night') document.documentElement.classList.add('night');
+
+    toggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('night');
+      localStorage.setItem(
+        key,
+        document.documentElement.classList.contains('night') ? 'night' : 'day'
+      );
+    });
+  </script>
+</body>
+</html>
