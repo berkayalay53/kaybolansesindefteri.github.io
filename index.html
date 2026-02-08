@@ -38,8 +38,8 @@
     <header class="hero-spacer"></header>
 
     <section class="quote q-center">
-      <p>“Yanılıyorsun Watson. Bu çocuk suskun değil. En gürültülü çığlıklar, dudaklar kapalıyken atılanlardır. Bu defter sessiz değil, sağır edici bir gürültüyle dolu.”</p>
-      <span>Analiz</span>
+      <p>"Bazen gözlerimi kaçırırım, çünkü o kadar çok şey anlatmak isterim ki, bakarsam dökülür sandığım kelimeler. Bu yüzden en çok bakmadığım yerde, aslında en çok bakmak istediğim yerdedir gözlerim."</p>
+      <span>Sükût</span>
     </section>
 
     <div class="divider">~</div>
@@ -57,8 +57,8 @@
     <div class="divider">~</div>
 
     <section class="quote q-left">
-      <p>“Bu sayfa yanmış.”</p>
-      <span>Kayıp</span>
+      <p>“Bazı eller, bir daha dokunulmamak üzere geçer buradan; ama bıraktıkları tenle değil, zamanla silinir.”</p>
+      <span>İzlek</span>
     </section>
 
     <section class="quote q-center">
@@ -81,7 +81,18 @@
     </div>
 
   </main>
+<div class="music-control" id="music-trigger">
+    <div class="disc-wrapper">
+      <div class="disc" id="disc">
+        <img src="./kralkaybederse.jpg" alt="Müzik Plağı" draggable="false">
+      </div>
+    </div>
+    <span class="music-hint">Melodiyi dinle...</span>
+  </div>
 
+  <audio id="bg-music" loop>
+    <source src="./muzik.mp3" type="audio/mpeg">
+  </audio>
   <script>
     // === STANDART GİRİŞ ve SCROLL MANTIĞI ===
     const introScreen = document.getElementById('intro-screen');
@@ -113,6 +124,44 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.quote').forEach(quote => observer.observe(quote));
+    // ... (Üstteki animasyon kodları kalsın) ...
+
+    // === MÜZİK OYNATICI VE SESSİZLİK SENSÖRÜ ===
+    const musicTrigger = document.getElementById('music-trigger');
+    const music = document.getElementById('bg-music');
+    const disc = document.getElementById('disc');
+    const hint = document.querySelector('.music-hint');
+
+    // 1. Tıklayınca Çal/Durur
+    musicTrigger.addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+        disc.classList.add('playing');
+        hint.textContent = "Çalıyor...";
+        hint.style.opacity = "0.7";
+      } else {
+        music.pause();
+        disc.classList.remove('playing');
+        hint.textContent = "Duraklatıldı";
+      }
+    });
+
+    // 2. Müzik bitince (Döngüde gerçi ama olsun)
+    music.addEventListener('ended', () => {
+      disc.classList.remove('playing');
+      hint.textContent = "Tekrarla";
+    });
+
+    // 3. SESSİZLİK SENSÖRÜ (Sekme değişirse sussun)
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        music.pause();
+        disc.classList.remove('playing');
+        document.title = "Sessizlik..."; // Sekme adını değiştir
+      } else {
+        document.title = "Turuncu Saçlı Kız — Berkay Alay"; // Geri gelince düzelt
+      }
+    });
   </script>
 
 </body>
